@@ -40,7 +40,7 @@ fi
 
 # Buffer
 buffer=$(bashio::config 'buffer')
-sed -i "/#buffer = 1000/a buffer = ${bufffer}" "${config}"
+sed -i "/#buffer = 1000/a buffer = ${buffer}" "${config}"
 # Codec
 codec=$(bashio::config 'codec')
 sed -i "/#codec = flac/a codec = ${codec}" "${config}"
@@ -56,7 +56,7 @@ sed "/[http]/a enabled = ${http}" "${config}"
 sed -i "/#bind_to_address = 0.0.0.0/a bind_to_address = ::" "${config}"
 # TCP
 tcp=$(bashio::config 'tcp_enabled')
-sed "/[TCP]/a enabled = ${TCP}" "${config}"
+sed "/[TCP]/a enabled = ${tcp}" "${config}"
 # Logging
 logging=$(bashio::config 'logging_enabled')
 sed "/[logging]/a debug = ${logging}" "${config}"
