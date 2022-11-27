@@ -1,0 +1,45 @@
+---
+name: snapcast-server
+version: dev
+slug: snapcastserver
+description: Create a snapcast server
+url: https://github.com/Art-Ev/addon-snapserver
+codenotary: arthur@evrard.dev
+arch:
+  - aarch64
+  - amd64
+  - armv7
+  - i386
+host_network: true
+map: ["share:rw"]
+audio: true
+init: false
+options:
+  streams: "pipe:///share/snapfifo/librespot?name=SpotifyConnect&sampleformat=44100:16:2"
+  buffer: 1000
+  codec: "flac"
+  send_to_muted: "false"
+  sampleformat: "48000:16:2"
+  http_enabled: "true"
+  tcp_enabled: "true"
+  logging_enabled: "true"
+  server_threads: -1
+  server_datadir: "/share/snapcast/"
+schema:
+  streams: str
+  buffer: int
+  codec: str
+  send_to_muted: str
+  sampleformat: str
+  http_enabled: str
+  tcp_enabled: str
+  logging_enabled: str
+  server_threads: int
+  server_datadir: str
+  stream_bis: str?
+  stream_ter: str?
+ports:
+  1704/tcp: 1704
+  1705/tcp: 1705
+  1780/tcp: 1780
+  4953/tcp: 4953
