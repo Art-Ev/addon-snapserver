@@ -4,7 +4,7 @@ version: dev
 slug: snapcastserver
 description: Create a snapcast server
 url: https://github.com/Art-Ev/addon-snapserver/
-codenotary: arthur@evrard
+codenotary: arthur@evrard.dev
 arch:
   - aarch64
   - amd64
@@ -14,7 +14,7 @@ host_network: true
 audio: true
 init: false
 options:
-  streams: pipe:///share/snapfifo/librespot?name=SpotifyConnect&sampleformat=44100:16:2
+  streams: "pipe:///share/snapfifo/librespot?name=SpotifyConnect&sampleformat=44100:16:2"
   buffer: 1000
   codec: flac
   send_to_muted: false
