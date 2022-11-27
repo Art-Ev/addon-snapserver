@@ -26,7 +26,7 @@ RUN \
         --bin librespot \
         --version 0.4.2 \
         --verbose \ 
-        --librespot \
+        -- librespot \
     \
     && apk del --no-cache --purge .build-dependencies \
     && rm -fr \
@@ -34,6 +34,7 @@ RUN \
         ~/.cargo \
         /usr/.crates.toml \
         /usr/.crates2.json
+
 #Install snapcast
 RUN sed -i -e 's/v[[:digit:]]\..*\//edge\//g' /etc/apk/repositories && apk add --no-cache snapcast bash
 
