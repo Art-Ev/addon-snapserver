@@ -11,6 +11,7 @@ arch:
   - armv7
   - i386
 host_network: true
+map: ["share:rw"]
 audio: true
 init: false
 options:
