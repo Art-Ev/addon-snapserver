@@ -67,8 +67,8 @@ sed -i "/#threads = -1/a threads = ${threads}" "${config}"
 datadir=$(bashio::config 'server_datadir')
 sed -i "/#datadir =/a datadir = ${datadir}" "${config}"
 
-mapfile < "${config}"
-bashio::log.info "${mapfile[@]}"
+mapfile < /etc/snapserver.conf
+bashio::log.info "${mapfile}"
 
 bashio::log.info "Starting SnapServer..."
 
