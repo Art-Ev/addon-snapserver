@@ -36,6 +36,8 @@ schema:
   logging_enabled: str
   server_threads: int
   server_datadir: str
+  stream_bis: str?
+  stream_ter: str?
 ports:
   1704/tcp: 1704
   1705/tcp: 1705

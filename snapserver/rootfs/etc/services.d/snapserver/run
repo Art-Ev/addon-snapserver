@@ -3,6 +3,8 @@
 # Home Assistant Community Add-on: Snapcaster
 # ==============================================================================
 declare streams
+declare stream_bis
+declare stream_ter
 declare buffer
 declare codec
 declare muted
@@ -27,6 +29,17 @@ bashio::log.info "Populating snapserver.conf..."
 # Streams
 streams=$(bashio::config 'streams')
 sed "/[stream]/a $(streams)" "${config}"
+
+# Stream bis and ter
+if bashio::config.has_value 'stream_bis'; then
+stream_bis=$(bashio::config 'stream_bis')
+sed "/[stream]/a $(stream_bis)" "${config}"
+fi
+if bashio::config.has_value 'stream_ter'; then
+stream_ter=$(bashio::config 'stream_ter')
+sed "/[stream]/a $(stream_ter)" "${config}"
+fi
+
 # Buffer
 buffer=$(bashio::config 'buffer')
 sed -i "/#buffer = 1000/a buffer = $(bufffer)" "${config}"
