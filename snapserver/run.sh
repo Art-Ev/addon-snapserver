@@ -30,12 +30,12 @@ sed "/[stream]/a $(streams)" "${config}"
 
 # Stream bis and ter
 if bashio::config.has_value 'stream_bis'; then
-stream_bis=$(bashio::config 'stream_bis')
-sed "/[stream]/a $(stream_bis)" "${config}"
+    stream_bis=$(bashio::config 'stream_bis')
+    sed "/[stream]/a $(stream_bis)" "${config}"
 fi
 if bashio::config.has_value 'stream_ter'; then
-stream_ter=$(bashio::config 'stream_ter')
-sed "/[stream]/a $(stream_ter)" "${config}"
+    stream_ter=$(bashio::config 'stream_ter')
+    sed "/[stream]/a $(stream_ter)" "${config}"
 fi
 
 # Buffer
