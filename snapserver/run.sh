@@ -40,7 +40,6 @@ fi
 
 # Buffer
 buffer=$(bashio::config 'buffer')
-bashio::log.info "Bufffer: ${buffer}"
 sed -i "/#buffer = 1000/a buffer = ${buffer}" "${config}"
 # Codec
 codec=$(bashio::config 'codec')
@@ -67,6 +66,8 @@ sed -i "/#threads = -1/a threads = ${threads}" "${config}"
 # Datadir
 datadir=$(bashio::config 'server_datadir')
 sed -i "/#datadir =/a datadir = ${datadir}" "${config}"
+
+bashio::log.info "$(</etc/snapserver.conf )"
 
 bashio::log.info "Starting SnapServer..."
 
