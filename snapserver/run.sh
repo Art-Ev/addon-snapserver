@@ -40,6 +40,7 @@ fi
 
 # Buffer
 buffer=$(bashio::config 'buffer')
+bashio::log.info "Bufffer: ${buffer}"
 sed -i "/#buffer = 1000/a buffer = ${buffer}" "${config}"
 # Codec
 codec=$(bashio::config 'codec')
