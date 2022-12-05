@@ -57,6 +57,9 @@ http=$(bashio::config 'http_enabled')
 echo "[http]" >> "${config}"
 echo "enabled = ${http}" >> "${config}"
 echo "bind_to_address = ::" >> "${config}"
+# Datadir
+datadir=$(bashio::config 'server_datadir')
+echo "doc_root = ${datadir}" >> "${config}"
 # TCP
 
 echo "[tcp]" >> "${config}"
@@ -72,9 +75,6 @@ echo "debug = ${logging}" >> "${config}"
 echo "[server]" >> "${config}"
 threads=$(bashio::config 'server_threads')
 echo "threads = ${threads}" >> "${config}"
-# Datadir
-datadir=$(bashio::config 'server_datadir')
-echo "datadir = ${datadir}" >> "${config}"
 
 bashio::log.info "Starting SnapServer..."
 
