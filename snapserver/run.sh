@@ -24,51 +24,57 @@ if ! bashio::fs.file_exists '/etc/snapserver.conf'; then
 fi
 bashio::log.info "Populating snapserver.conf..."
 
+echo "[stream]" > "${config}"
 # Streams
 streams=$(bashio::config 'streams')
-sed "/[stream]/a ${streams}" "${config}"
+echo "${streams}" >> "${config}"
 
 # Stream bis and ter
 if bashio::config.has_value 'stream_bis'; then
     stream_bis=$(bashio::config 'stream_bis')
-    sed "/[stream]/a ${stream_bis}" "${config}"
+    echo "${stream_bis}" >> "${config}"
 fi
 if bashio::config.has_value 'stream_ter'; then
     stream_ter=$(bashio::config 'stream_ter')
-    sed "/[stream]/a ${stream_ter}" "${config}"
+    echo "${stream_ter}" >> "${config}"
 fi
 
 # Buffer
 buffer=$(bashio::config 'buffer')
-sed -i "/#buffer = 1000/a buffer = ${buffer}" "${config}"
+echo "buffer = ${buffer}" >> "${config}"
 # Codec
 codec=$(bashio::config 'codec')
-sed -i "/#codec = flac/a codec = ${codec}" "${config}"
+echo "codec = ${codec}" >> "${config}"
 # Muted
 muted=$(bashio::config 'send_to_muted')
-sed -i "/#send_to_muted = false/a codec = ${muted}" "${config}"
+echo "send_to_muted = = ${muted}" >> "${config}"
 # Sampleformat
 sampleformat=$(bashio::config 'sampleformat')
-sed -i "/#sampleformat = 48000:16:2/a codec = ${sampleformat}" "${config}"
+echo "sampleformat = ${sampleformat}" >> "${config}"
+
 # Http
 http=$(bashio::config 'http_enabled')
-sed "/[http]/a enabled = ${http}" "${config}"
-sed -i "/#bind_to_address = 0.0.0.0/a bind_to_address = ::" "${config}"
+echo "[http]" >> "${config}"
+echo "enabled = ${http}" >> "${config}"
+echo "bind_to_address = ::" >> "${config}"
 # TCP
+
+echo "[tcp]" >> "${config}"
 tcp=$(bashio::config 'tcp_enabled')
-sed "/[TCP]/a enabled = ${tcp}" "${config}"
+echo "enabled = ${tcp}" >> "${config}"
+
 # Logging
+echo "[logging]" >> "${config}"
 logging=$(bashio::config 'logging_enabled')
-sed "/[logging]/a debug = ${logging}" "${config}"
+echo "debug = ${logging}" >> "${config}"
+
 # Threads
+echo "[server]" >> "${config}"
 threads=$(bashio::config 'server_threads')
-sed -i "/#threads = -1/a threads = ${threads}" "${config}"
+echo "threads = ${threads}" >> "${config}"
 # Datadir
 datadir=$(bashio::config 'server_datadir')
-sed -i "/#datadir =/a datadir = ${datadir}" "${config}"
-
-value=`cat ${config}`
-bashio::log.info "${buffer}"
+echo "datadir = ${datadir}" >> "${config}"
 
 bashio::log.info "Starting SnapServer..."
 
