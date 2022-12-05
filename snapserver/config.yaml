@@ -15,9 +15,7 @@ map: ["share:rw"]
 audio: true
 init: false
 options:
-  streams: "pipe:///share/snapfifo/librespot?name=SpotifyConnect&sampleformat=44100:16:2"
-  stream_bis: "tcp://0.0.0.0?port=4953&name=snapbroadcast"
-  stream_ter: "pipe:///share/snapfifo/mopidy?name=Mopidy&sampleformat=44100:16:2"
+  streams: "source = spotify:///librespot?name=Spotify"
   buffer: 1000
   codec: "flac"
   send_to_muted: "false"
