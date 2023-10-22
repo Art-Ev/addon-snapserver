@@ -22,7 +22,7 @@ RUN \
         --root /usr \
         --bin librespot \
         --version 0.2.0 \
-        --verbose \ 
+        --verbose \
         -- librespot \
     \
     && apk del --no-cache --purge .build-dependencies \
