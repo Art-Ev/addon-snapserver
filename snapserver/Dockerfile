@@ -5,7 +5,26 @@ FROM $BUILD_FROM
 ENV LANG C.UTF-8
 
 #Install librespot
-RUN apk add --no-cache bash librespot=0.2.0 se
+RUN apk add --no-cache --virtual .build-dependencies \
+        build-base \
+        cargo \
+        git \
+        protobuf-dev \
+        pulseaudio-dev \
+    \
+    && apk add --no-cache \
+        pulseaudio \
+    \
+    && cargo install \
+        --locked \
+        --no-default-features \
+        --features pulseaudio-backend \
+        --root /usr \
+        --bin librespot \
+        --version 0.2.0 \
+        --verbose \
+        --librespot \
+    \
 
 #Install snapcast
 RUN sed -i -e 's/v[[:digit:]]\..*\//edge\//g' /etc/apk/repositories && apk add --no-cache snapcast bash
