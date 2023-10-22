@@ -4,33 +4,18 @@ FROM $BUILD_FROM
 # Add env
 ENV LANG C.UTF-8
 
-RUN \
-    apk add --no-cache --virtual .build-dependencies \
-        build-base=0.5-r3 \
-        cargo=1.60.0-r2 \
-        git \
-        protobuf-dev=3.18.1-r3 \
-        pulseaudio-dev=15.0-r2 \
-    \
-    && apk add --no-cache \
-        pulseaudio=15.0-r2 \
-    \
-    && cargo install \
-        --locked \
-        --no-default-features \
-        --features pulseaudio-backend \
-        --root /usr \
-        --bin librespot \
-        --version 0.4.2 \
-        --verbose \
-        -- librespot \
-    \
-    && apk del --no-cache --purge .build-dependencies \
-    && rm -fr \
-        /tmp/* \
-        ~/.cargo \
-        /usr/.crates.toml \
-        /usr/.crates2.json
+#Install librespot
+RUN apk -U add build-base curl cargo portaudio-dev protobuf-dev \
+ && cd /root \
+ && curl -LO https://github.com/librespot-org/librespot/archive/refs/tags/v0.2.0.zip \
+ && unzip v0.2.0.zip \
+ && cd librespot-0.2.0 \
+ && cargo build --jobs $(grep -c ^processor /proc/cpuinfo) --release --no-default-features \
+ && mv target/release/librespot /usr/local/bin \
+ && cd / \
+ && apk --purge del curl cargo portaudio-dev protobuf-dev \
+ && apk add llvm-libunwind \
+ && rm -rf /etc/ssl /var/cache/apk/* /lib/apk/db/* /root/v0.2.0.zip /root/librespot-0.2.0 /root/.cargo
 
 #Install snapcast
 RUN sed -i -e 's/v[[:digit:]]\..*\//edge\//g' /etc/apk/repositories && apk add --no-cache snapcast bash
