@@ -6,14 +6,14 @@ ENV LANG C.UTF-8
 
 RUN \
     apk add --no-cache --virtual .build-dependencies \
-        build-base=0.5-r3 \
-        cargo=1.60.0-r2 \
-        git=2.36.3-r0 \
-        protobuf-dev=3.18.1-r3 \
-        pulseaudio-dev=15.0-r2 \
+        build-base \
+        cargo \
+        git \
+        protobuf-dev \
+        pulseaudio-dev \
     \
     && apk add --no-cache \
-        pulseaudio=15.0-r2 \
+        pulseaudio \
     \
     && cargo install \
         --locked \
@@ -21,7 +21,7 @@ RUN \
         --features pulseaudio-backend \
         --root /usr \
         --bin librespot \
-        --version 0.4.2 \
+        --version 0.2.0 \
         --verbose \ 
         -- librespot \
     \
