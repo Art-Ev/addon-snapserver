@@ -5,7 +5,8 @@ FROM $BUILD_FROM
 ENV LANG C.UTF-8
 
 #Install librespot
-RUN apk add --no-cache --virtual .build-dependencies \
+RUN \
+    apk add --no-cache --virtual .build-dependencies \
         build-base \
         cargo \
         git \
@@ -23,10 +24,8 @@ RUN apk add --no-cache --virtual .build-dependencies \
         --bin librespot \
         --version 0.2.0 \
         --verbose \
-        --librespot
-
-#Install snapcast
-RUN sed -i -e 's/v[[:digit:]]\..*\//edge\//g' /etc/apk/repositories && apk add --no-cache snapcast bash
+        --librespot \
+    && sed -i -e 's/v[[:digit:]]\..*\//edge\//g' /etc/apk/repositories && apk add --no-cache snapcast bash
 
 # Copy data for add-on
 COPY run.sh /
