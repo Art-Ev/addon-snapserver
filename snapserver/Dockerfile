@@ -1,20 +1,22 @@
-ARG BUILD_FROM
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:14.2.2
 FROM $BUILD_FROM
 
-# Add env
-ENV LANG C.UTF-8
+# Set shell
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-#Install librespot
+# Setup base
+ARG LIBRESPOT_VERSION="0.2.0"
+# hadolint ignore=DL3003
 RUN \
     apk add --no-cache --virtual .build-dependencies \
-        build-base \
-        cargo \
-        git \
-        protobuf-dev \
-        pulseaudio-dev \
+        build-base=0.5-r3 \
+        cargo=1.71.1-r0 \
+        git=2.40.1-r0 \
+        protobuf-dev=3.21.12-r2 \
+        pulseaudio-dev=16.1-r10 \
     \
     && apk add --no-cache \
-        pulseaudio \
+        pulseaudio=16.1-r10 \
     \
     && cargo install \
         --locked \
@@ -22,9 +24,16 @@ RUN \
         --features pulseaudio-backend \
         --root /usr \
         --bin librespot \
-        --version 0.2.0 \
-        --verbose \
-        --librespot \
+        --version "${LIBRESPOT_VERSION}" \
+        --verbose \ 
+        -- librespot \
+    \
+    && apk del --no-cache --purge .build-dependencies \
+    && rm -fr \
+        /tmp/* \
+        ~/.cargo \
+        /usr/.crates.toml \
+        /usr/.crates2.json \
     && sed -i -e 's/v[[:digit:]]\..*\//edge\//g' /etc/apk/repositories && apk add --no-cache snapcast bash
 
 # Copy data for add-on
