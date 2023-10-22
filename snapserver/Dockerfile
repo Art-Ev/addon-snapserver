@@ -23,8 +23,7 @@ RUN apk add --no-cache --virtual .build-dependencies \
         --bin librespot \
         --version 0.2.0 \
         --verbose \
-        --librespot \
-    \
+        --librespot
 
 #Install snapcast
 RUN sed -i -e 's/v[[:digit:]]\..*\//edge\//g' /etc/apk/repositories && apk add --no-cache snapcast bash
