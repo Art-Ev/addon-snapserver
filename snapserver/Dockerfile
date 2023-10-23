@@ -36,7 +36,7 @@ RUN \
         /usr/.crates2.json
 
 #Install Snapcast
-RUN sed -i -e 's/v[[:digit:]]\..*\//edge\//g' /etc/apk/repositories && apk add --no-cache snapcast bash
+RUN apk add --no-cache snapcast-server bash
 
 # Copy data for add-on
 COPY run.sh /
