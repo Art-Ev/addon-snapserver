@@ -77,5 +77,4 @@ threads=$(bashio::config 'server_threads')
 echo "threads = ${threads}" >> "${config}"
 
 bashio::log.info "Starting SnapServer..."
-
-/usr/bin/snapserver -c /etc/snapserver.conf
+service snapserver start
