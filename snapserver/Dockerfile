@@ -17,15 +17,9 @@ RUN \
     && apk add --no-cache \
         pulseaudio=16.1-r10 \
     \
-    && cargo install \
-        --locked \
-        --no-default-features \
-        --features pulseaudio-backend \
-        --root /usr \
-        --bin librespot \
-        --version "${LIBRESPOT_VERSION}" \
-        --verbose \ 
-        -- librespot \
+    && apk add --no-cache \
+        librespot \
+        --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing \
     && apk del --no-cache --purge .build-dependencies \
     && rm -fr \
         /tmp/* \
