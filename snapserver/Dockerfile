@@ -17,15 +17,9 @@ RUN \
     && apk add --no-cache \
         pulseaudio=16.1-r10 \
     \
-    && cargo install \
-        --locked \
-        --no-default-features \
-        --features pulseaudio-backend \
-        --root /usr \
-        --bin librespot \
-        --version "${LIBRESPOT_VERSION}" \
-        --verbose \ 
-        -- librespot \
+    && apk add librespot \
+        --no-cache \
+        --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing \
     && apk del --no-cache --purge .build-dependencies \
     && rm -fr \
         /tmp/* \
@@ -37,7 +31,6 @@ RUN \
 RUN \
     apk add snapcast-server \
         --no-cache \
-        --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community \ 
         bash
 
 # Copy data for add-on
