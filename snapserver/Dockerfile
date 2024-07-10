@@ -4,8 +4,6 @@ FROM $BUILD_FROM
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Setup base
-ARG LIBRESPOT_VERSION="0.4.2"
 # hadolint ignore=DL3003
 RUN \
     apk add --no-cache --virtual .build-dependencies \
@@ -18,15 +16,9 @@ RUN \
     && apk add --no-cache \
         pulseaudio=16.1-r10 \
     \
-    && cargo install \
-        --locked \
-        --no-default-features \
-        --features pulseaudio-backend \
-        --root /usr \
-        --bin librespot \
-        --version "${LIBRESPOT_VERSION}" \
-        --verbose \ 
-        -- librespot \
+    && apk add librespot\
+        --no-cache \
+        --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing \
     \
     && apk del --no-cache --purge .build-dependencies \
     && rm -fr \
@@ -36,7 +28,11 @@ RUN \
         /usr/.crates2.json
 
 #Install Snapcast
-RUN apk add --no-cache snapcast-server bash
+RUN \
+    apk add snapcast-server \
+        --no-cache \
+        --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community \ 
+        bash
 
 # Copy data for add-on
 COPY run.sh /
