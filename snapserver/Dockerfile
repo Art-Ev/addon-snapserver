@@ -17,8 +17,8 @@ RUN \
     && apk add --no-cache \
         pulseaudio=16.1-r10 \
     \
-    && apk add librespot \
-        --no-cache \
+    && apk add --no-cache \
+        librespot \
         --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing \
     && apk del --no-cache --purge .build-dependencies \
     && rm -fr \
@@ -28,11 +28,7 @@ RUN \
         /usr/.crates2.json
 
 #Install Snapcast
-RUN \
-    apk add snapcast-server \
-        --no-cache \
-        --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community \
-    && apk add bash
+RUN apk add --no-cache snapcast-server bash
 
 # Copy data for add-on
 COPY run.sh /
