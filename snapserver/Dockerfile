@@ -31,7 +31,8 @@ RUN \
 RUN \
     apk add snapcast-server \
         --no-cache \
-        bash
+        --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community \
+    && apk add bash
 
 # Copy data for add-on
 COPY run.sh /
