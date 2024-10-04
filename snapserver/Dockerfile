@@ -4,7 +4,6 @@ FROM $BUILD_FROM
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-ARG LIBRESPOT_VERSION="0.4.2"
 # hadolint ignore=DL3003
 RUN \
     apk add --no-cache --virtual .build-dependencies \
@@ -18,7 +17,7 @@ RUN \
         pulseaudio \
         --repository=https://dl-cdn.alpinelinux.org/alpine/latest-stable/community/armhf/ \
     \
-        && apk add --no-cache \
+    && apk add --no-cache \
         librespot \
         --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing \
     && apk del --no-cache --purge .build-dependencies \
