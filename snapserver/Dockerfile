@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base:16.3.2
+ARG BUILD_FROM
 FROM $BUILD_FROM
 
 # Set shell
@@ -6,29 +6,22 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # hadolint ignore=DL3003
 RUN \
-    apk add --no-cache --virtual .build-dependencies \
-        build-base=0.5-r3 \
-        cargo=1.78.0-r0 \
-        git=2.45.2-r0 \
-        protobuf-dev=24.4-r1 \
-    \
-    && apk add --no-cache \
-        pulseaudio \
-        pulseaudio \
-        --repository=https://dl-cdn.alpinelinux.org/alpine/latest-stable/community/armhf/ \
-    \
-    && apk add --no-cache \
-        librespot \
-        --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing \
-    && apk del --no-cache --purge .build-dependencies \
+    apk add --no-cache \
+        pulseaudio alsa-plugins-pulse bash \
     && rm -fr \
-        /tmp/* \
-        ~/.cargo \
-        /usr/.crates.toml \
-        /usr/.crates2.json
+        /tmp/*
+        
+#Install Librespot
+RUN apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ librespot=0.4.2-r4
 
 #Install Snapcast
-RUN apk add --no-cache snapcast-server bash
+RUN apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community/ snapcast-server=0.29.0-r0
+
+#Install Snapweb
+RUN \
+    wget https://github.com/badaix/snapweb/releases/download/v0.8.0/snapweb.zip && \
+    unzip -o snapweb.zip -d /usr/share/snapserver/snapweb/ && \
+    rm snapweb.zip
 
 # Copy data for add-on
 COPY run.sh /
