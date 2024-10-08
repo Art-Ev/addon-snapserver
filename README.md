@@ -1,13 +1,10 @@
 # Home Assistant Community Add-on: Snapcast
 
-![Project Stage][project-stage-shield]
-[![License][license-shield]](LICENSE.md)
-
-![Supports armhf Architecture][armhf-shield]
-![Supports armv7 Architecture][armv7-shield]
-![Supports aarch64 Architecture][aarch64-shield]
-![Supports amd64 Architecture][amd64-shield]
-![Supports i386 Architecture][i386-shield]
+<p align="center">
+  <a href=""><img src="https://img.shields.io/badge/version-2024.10-blue" /></a>
+  <a href=""><img src="https://img.shields.io/badge/project-experimental-yellow" /></a>
+  <a href="https://github.com/Art-Ev/addon-snapserver/blob/main/LICENSE.md"> <img src="https://img.shields.io/badge/licence-mit-green" /></a>
+</p>
 
 ## Contributing
 
