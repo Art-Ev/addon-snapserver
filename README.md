@@ -1,6 +1,5 @@
 # Home Assistant Community Add-on: Snapcast
 
-[![GitHub Release][releases-shield]][releases]
 ![Project Stage][project-stage-shield]
 [![License][license-shield]](LICENSE.md)
 
@@ -12,20 +11,13 @@
 
 ## Contributing
 
-This is an active open-source project. We are always open to people who want to
+This is an active open-source project. Totally to people who want to
 use the code or contribute to it.
-
-We have set up a separate document containing our
-[contribution guidelines](.github/CONTRIBUTING.md).
 
 Thank you for being involved! :heart_eyes:
 
-## We have got some Home Assistant add-ons for you
-
-Want some more functionality to your Home Assistant instance?
-
-We have created multiple add-ons for Home Assistant. For a full list, check out
-our [GitHub Repository][repository].
+## Want more Home assistant add-ons ?
+Check HA community addons [here](https://github.com/hassio-addons) !
 
 ## License
 
