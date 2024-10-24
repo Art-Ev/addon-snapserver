@@ -25,6 +25,7 @@ options:
   logging_enabled: "true"
   server_threads: -1
   server_datadir: "/usr/share/snapserver/snapweb"
+  initial_volume: 100
 schema:
   streams: str
   buffer: int
