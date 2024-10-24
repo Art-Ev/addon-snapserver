@@ -76,5 +76,10 @@ echo "[server]" >> "${config}"
 threads=$(bashio::config 'server_threads')
 echo "threads = ${threads}" >> "${config}"
 
+# streaming client
+echo "[streaming_client]" >> "${config}"
+initial_volume=$(bashio::config 'initial_volume')
+echo "initial_volume = ${initial_volume}" >> "${config}"
+
 bashio::log.info "Starting SnapServer..."
 exec snapserver
