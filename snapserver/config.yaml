@@ -37,6 +37,7 @@ schema:
   logging_enabled: str
   server_threads: int
   server_datadir: str
+  initial_volume: int
   stream_bis: str?
   stream_ter: str?
 ports:
