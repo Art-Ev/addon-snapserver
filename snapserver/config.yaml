@@ -43,3 +43,14 @@ ports:
   1705/tcp: 1705
   1780/tcp: 1780
   4953/tcp: 4953
+ports_description:
+  1704/tcp: "Snapcast Stream"
+  1705/tcp: "Snapcast JSON RPC"
+  1780/tcp: "Snapcast HTTP controller"
+  4953/tcp: "Snapcast HA TCP input"
+ingress: true
+ingress_port: 1780
+panel_icon: "mdi:cast-audio"
+panel_title: "Snapcast"
+panel_admin: false
+webui: "http://[HOST]:[PORT:1780]/"

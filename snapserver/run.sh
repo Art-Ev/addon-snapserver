@@ -56,7 +56,9 @@ echo "sampleformat = ${sampleformat}" >> "${config}"
 http=$(bashio::config 'http_enabled')
 echo "[http]" >> "${config}"
 echo "enabled = ${http}" >> "${config}"
+echo "bind_to_address = 0.0.0.0" >> "${config}"
 echo "bind_to_address = ::" >> "${config}"
+
 # Datadir
 datadir=$(bashio::config 'server_datadir')
 echo "doc_root = ${datadir}" >> "${config}"
@@ -75,6 +77,15 @@ echo "debug = ${logging}" >> "${config}"
 echo "[server]" >> "${config}"
 threads=$(bashio::config 'server_threads')
 echo "threads = ${threads}" >> "${config}"
+
+# Modify snapweb websocket for ingress
+bashio::log.info "Adding ingress config to snapweb in ${datadir}/config.js..."
+cat > ${datadir}/config.js <<EOF
+"use strict";
+let config = {
+    baseUrl: (window.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.host + window.location.pathname.replace(/\/$/, '')
+}
+EOF
 
 bashio::log.info "Starting SnapServer..."
 exec snapserver
