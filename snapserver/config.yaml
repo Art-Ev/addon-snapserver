@@ -45,6 +45,7 @@ ports:
   4953/tcp: 4953
 ingress: true
 ingress_port: 1780
-panel_icon: mdi:cast-audio
+panel_icon: "mdi:cast-audio"
 panel_title: Snapcast
 panel_admin: false
+webui: "http://[HOST]:[PORT:1780]/"
