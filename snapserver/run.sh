@@ -56,6 +56,7 @@ echo "sampleformat = ${sampleformat}" >> "${config}"
 http=$(bashio::config 'http_enabled')
 echo "[http]" >> "${config}"
 echo "enabled = ${http}" >> "${config}"
+echo "bind_to_address = 0.0.0.0" >> "${config}"
 echo "bind_to_address = ::" >> "${config}"
 
 # Datadir
