@@ -79,6 +79,7 @@ threads=$(bashio::config 'server_threads')
 echo "threads = ${threads}" >> "${config}"
 
 # Modify snapweb websocket for ingress
+bashio::log.info "Adding ingress config to snapweb in ${datadir}/config.js..."
 cat > ${datadir}/config.js <<EOF
 "use strict";
 let config = {
