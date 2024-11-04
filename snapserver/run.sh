@@ -78,5 +78,13 @@ echo "[server]" >> "${config}"
 threads=$(bashio::config 'server_threads')
 echo "threads = ${threads}" >> "${config}"
 
+# Modify snapweb websocket for ingress
+cat > ${datadir}/config.js <<EOF
+"use strict";
+let config = {
+    baseUrl: (window.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.host + window.location.pathname.replace(/\/$/, '')
+}
+EOF
+
 bashio::log.info "Starting SnapServer..."
 exec snapserver
