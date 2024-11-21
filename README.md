@@ -13,6 +13,11 @@ use the code or contribute to it.
 
 Thank you for being involved! :heart_eyes:
 
+## Contributors
+<a href="https://github.com/Art-Ev/addon-snapserver/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Art-Ev/addon-snapserver" />
+</a>
+
 ## Want more Home assistant add-ons ?
 Check HA community addons [here](https://github.com/hassio-addons) !
 
